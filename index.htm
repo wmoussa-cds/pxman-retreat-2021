@@ -1,26 +1,83 @@
 <html>
 
 <head>
-</head>
-
-<body>
-  <audio id="xyz" src="beep.mp3" preload="auto"></audio>
+  <link rel="stylesheet" href="main.css">
 
   <script type="text/javascript">
     let activities = [{
         "activity": "Opening Remarks",
-        "max_end_time": new Date('Dec 7, 2021 13:25:45')
+        "max_end_time": new Date('Dec 9, 2021 12:58:00')
       },
       {
         "activity": "Icebreaker",
-        "max_end_time": new Date('Dec 7, 2021 13:41:45')
+        "max_end_time": new Date('Dec 9, 2021 13:28:00')
       },
       {
         "activity": "User Manuals",
-        "max_end_time": new Date('Dec 7, 2021 13:45:45')
+        "max_end_time": new Date('Dec 9, 2021 13:58:00')
       },
       {
-        "activity": "Before The Holidays!",
+        "activity": "Looking Back",
+        "max_end_time": new Date('Dec 9, 2021 14:43:00')
+      },
+      {
+        "activity": "Break",
+        "max_end_time": new Date('Dec 9, 2021 15:13:00')
+      },
+      {
+        "activity": "Platform Vision and Strategy",
+        "max_end_time": new Date('Dec 9, 2021 15:58:00')
+      },
+      {
+        "activity": "Maintenance Team",
+        "max_end_time": new Date('Dec 9, 2021 16:43:00')
+      },
+      {
+        "activity": "Closing Remarks Day 1",
+        "max_end_time": new Date('Dec 9, 2021 16:58:00')
+      },
+      {
+        "activity": "Ways of Working",
+        "max_end_time": new Date('Dec 10, 2021 10:28:00')
+      },
+      {
+        "activity": "Break2",
+        "max_end_time": new Date('Dec 10, 2021 10:43:00')
+      },
+      {
+        "activity": "Expectations Mapping",
+        "max_end_time": new Date('Dec 10, 2021 11:53:00')
+      },
+      {
+        "activity": "Break3",
+        "max_end_time": new Date('Dec 10, 2021 12:08:00')
+      },
+      {
+        "activity": "PMA",
+        "max_end_time": new Date('Dec 10, 2021 12:53:00')
+      },
+      {
+        "activity": "Lunch",
+        "max_end_time": new Date('Dec 10, 2021 13:53:00')
+      },
+      {
+        "activity": "PMA2",
+        "max_end_time": new Date('Dec 10, 2021 14:53:00')
+      },
+      {
+        "activity": "PMA2",
+        "max_end_time": new Date('Dec 10, 2021 14:53:00')
+      },
+      {
+        "activity": "Retreat look back",
+        "max_end_time": new Date('Dec 10, 2021 15:13:00')
+      },
+      {
+        "activity": "Closing Remarks Day 2",
+        "max_end_time": new Date('Dec 10, 2021 15:28:00')
+      },
+      {
+        "activity": "Before The End Of The Drinking",
         "max_end_time": new Date('Dec 25, 2021 00:00:01')
       }
     ]
@@ -30,7 +87,7 @@
       let sorted_activities = activities
         .filter(c => c.max_end_time > new Date().getTime())
         .sort((c1, c2) => (c1.max_end_time > c2.max_end_time) ? 1 : (c1.max_end_time < c2.max_end_time) ? -1 : 0);
-      console.log(sorted_activities[0]);
+      console.log(sorted_activities[0].activity.replace(" ", "_").toLowerCase());
       // Set the date we're counting down to
       var countDownDate = new Date(sorted_activities[0].max_end_time).getTime();
 
@@ -50,13 +107,15 @@
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element with id="demo"
-        document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
-          minutes + "m " + seconds + "s till the end of the current activity "+sorted_activities[0].activity;
+        document.getElementById("counter").innerHTML = days + "d " + hours + "h " +
+          minutes + "m " + seconds + "s till the end of the activity <strong>" + sorted_activities[0].activity+"</strong>";
 
+        document.getElementById(sorted_activities[0].activity.replace(" ", "_").toLowerCase()).style.border = "4px solid blue";
         // If the count down is finished, write some text
         if (distance < 0) {
           clearInterval(x);
-          document.getElementById("demo").innerHTML = "Time up! Next: "+sorted_activities[1].activity;
+          document.getElementById(sorted_activities[0].activity.replace(" ", "_").toLowerCase()).style.border = null;
+          document.getElementById("counter").innerHTML = "Time up! Next: " + sorted_activities[1].activity;
           document.getElementById('xyz').play();
 
         }
@@ -66,14 +125,97 @@
       //setTimeout(greeting, 3000);
     }
   </script>
+</head>
 
+<body>
+  <audio id="xyz" src="beep.mp3" preload="auto"></audio>
 
-  <button onclick="startTimer()">How much time left?</button>
+  <div class="container">
+    <div class="wrapper">
+      <h1>Platform Extended Management Retreat</h1>
+      <h2>Thu Dec,9 & Fri Dec,10</h2>
+      <button onclick="startTimer()">How much time left?</button>
+      <p id="counter"></p>
 
-  <p id="demo"></p>
+      <ul class="sessions">
+        <li id="opening_remarks">
+          <div class="time">12:45</div>
+          <p>Opening Remarks</p>
+        </li>
+        <li id="icebreaker">
+          <div class="time">13:00</div>
+          <p>Icebreaker 🧊</p>
+        </li>
+        <li id="user_manuals">
+          <div class="time">13:30</div>
+          <p>User Manuals 📖</p>
+        </li>
+        <li id="looking_back">
+          <div class="time">14:00</div>
+          <p>Looking Back 👓</p>
+        </li>
+        <li id="break">
+          <div class="time">14:45</div>
+          <p>Break. ☕</p>
+        </li>
+        <li id="platform_vision_and_strategy">
+          <div class="time">15:15</div>
+          <p>Platform Vision and Strategy</p>
+        </li>
+        <li id="maintenance team">
+          <div class="time">16:00</div>
+          <p>Maintenance Team: Who? Why? How?</p>
+        </li>
+        <li id="closing_remarks_day_1">
+          <div class="time">16:45</div>
+          <p>Closing Remarks Day 1</p>
+        </li>
+        <hr />
+        <h2>Friday</h2>
+        <li id="ways_of_working">
+          <div class="time">9:00</div>
+          <p>Ways of Working in the context of small multi-disciplinary teams</p>
+        </li>
+        <li id="break2">
+          <div class="time">10:30</div>
+          <p>Break</p>
+        </li>
+        <li id="expectations_mapping">
+          <div class="time">10:45</div>
+          <p>Expectations Mapping across Teams</p>
+        </li>
+        <li id="break3">
+          <div class="time">11:55</div>
+          <p>Break</p>
+        </li>
+        <li id="pma">
+          <div class="time">12:10</div>
+          <p>PMAs & Career Performance Progression (1/2)</p>
+        </li>
+        <li id="lunch">
+          <div class="time">12:55</div>
+          <p>Lunch</p>
+        </li>
+        <li id="pma2">
+          <div class="time">13:55</div>
+          <p>PMAs & Career Performance Progression (2/2)</p>
+        </li>
+        <li id="retreat_look_back">
+          <div class="time">14:55</div>
+          <p>Retreat look back: How well did we do? What could be improved?</p>
+        </li>
+        <li id="closing_remarks_day_2">
+          <div class="time">15:15</div>
+          <p>Closing Remarks Day 2</p>
+        </li>
+        <li id="before_the_end_of_the_drinking">
+          <div class="time">15:30</div>
+          <p>Optional Virtual Drinks: grab the poison of your choice</p>
+        </li>
 
-
-
+      </ul>
+    </div>
+  </div>
 </body>
 
 </html>

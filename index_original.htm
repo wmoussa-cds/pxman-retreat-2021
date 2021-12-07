@@ -1,0 +1,79 @@
+<html>
+
+<head>
+</head>
+
+<body>
+  <audio id="xyz" src="beep.mp3" preload="auto"></audio>
+
+  <script type="text/javascript">
+    let activities = [{
+        "activity": "Opening Remarks",
+        "max_end_time": new Date('Dec 7, 2021 13:25:45')
+      },
+      {
+        "activity": "Icebreaker",
+        "max_end_time": new Date('Dec 7, 2021 13:41:45')
+      },
+      {
+        "activity": "User Manuals",
+        "max_end_time": new Date('Dec 7, 2021 13:45:45')
+      },
+      {
+        "activity": "Before The Holidays!",
+        "max_end_time": new Date('Dec 25, 2021 00:00:01')
+      }
+    ]
+
+    function startTimer() {
+
+      let sorted_activities = activities
+        .filter(c => c.max_end_time > new Date().getTime())
+        .sort((c1, c2) => (c1.max_end_time > c2.max_end_time) ? 1 : (c1.max_end_time < c2.max_end_time) ? -1 : 0);
+      console.log(sorted_activities[0]);
+      // Set the date we're counting down to
+      var countDownDate = new Date(sorted_activities[0].max_end_time).getTime();
+
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
+          minutes + "m " + seconds + "s till the end of the current activity "+sorted_activities[0].activity;
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "Time up! Next: "+sorted_activities[1].activity;
+          document.getElementById('xyz').play();
+
+        }
+      }, 1000);
+
+
+      //setTimeout(greeting, 3000);
+    }
+  </script>
+
+
+  <button onclick="startTimer()">How much time left?</button>
+
+  <p id="demo"></p>
+
+
+
+</body>
+
+</html>
