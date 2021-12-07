@@ -2,9 +2,15 @@
 
 <head>
   <link rel="stylesheet" href="main.css">
+  <link rel="shortcut icon" type="image/jpg" href="icons8-countdown-clock-48.png"/>
 
   <script type="text/javascript">
-    let activities = [{
+    let activities = [
+      {
+        "activity": "Test",
+        "max_end_time": new Date('Dec 7, 2021 15:30:30')
+      },
+      {
         "activity": "Opening Remarks",
         "max_end_time": new Date('Dec 9, 2021 12:58:00')
       },
@@ -138,6 +144,10 @@
       <p id="counter"></p>
 
       <ul class="sessions">
+        <li id="test">
+          <div class="time">12:45</div>
+          <p>Test</p>
+        </li>
         <li id="opening_remarks">
           <div class="time">12:45</div>
           <p>Opening Remarks</p>
